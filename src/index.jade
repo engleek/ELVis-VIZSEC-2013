@@ -1,0 +1,344 @@
+!!! 5
+html
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    title ELVis: Extensible Log Visualization
+
+    //- Check out 'src/bower_components/prism/' for available themes
+    link(rel='stylesheet', type='text/css', href='bower_components/prism/prism-tomorrow.css')
+
+    link(rel='stylesheet', type='text/css', href='styles/main.css')
+
+  body
+
+    article
+
+      section
+        h1 ELVis
+        h3 Extensible Log Visualization
+        hr
+        .authors
+          .author
+            .name christopher.humphries
+            .domain inria.fr
+
+          .author
+            .name nicolas.prigent
+            .domain supelec.fr
+
+          .author
+            .name christophe.bidan
+            .domain supelec.fr
+
+          .author
+            .name frederic.majorczyk
+            .domain supelec.fr
+      
+      section
+        img.avatar(src='media/me.jpg', width='200')
+        hr
+        h2 Hello.
+        ul
+          li My name is Christopher Humphries.
+          li I'm a PhD student from Rennes, France.
+          li Working at INRIA/Supélec, in team CIDre.
+          li On a research grant from DGA-MI.
+
+      section
+        h2 CIDre
+        h3 We try to solve security problems.
+        ul
+          li
+            .label Intrusion Detection
+            .label AdHoc Networks
+            .label Privacy
+        hr
+        ul
+         li I work on security visualization.
+
+      section
+        img(src='media/pie.svg')
+        hr
+        h2 Why visualize&thinsp;?
+      
+      section
+        h2 Generally
+        h3 Help ourselves.
+        ul
+          li Make more sense of data.
+          li Understand the big picture.
+          li Regain control.
+      
+      section
+        h2 In security
+        h3 Bridge a gap.
+        ul
+          li Manual analysis is slow.
+          li Automatic analysis is dumb.
+      
+      section
+        h2 However…
+        h3 Extra knowledge required!
+        hr
+        ul
+          li statistics
+            em for the numbers
+          li design
+            em for the colors
+          li psychology
+            em for brain compatibility
+
+      section
+        h2 Solution
+        hr
+        h3 Move knowledge into software.
+          
+      section
+        h2
+          em “Pshaw! It's been done before!”
+
+      section
+        h2 Autovis
+        ul
+          li Statistically automatic and unopinionated visualization.
+        hr
+        h2 Tableau
+        ul
+          li Assisted and facilitated creation of general visualizations.
+      
+      section
+        h1 ELVis
+        ul
+          li Parses logs
+          li Uses security semantics
+          li Assists exploration by selecting and matching visualisations
+
+      section
+        h2 Log Organization
+        hr
+        ul
+          li Each log has a specific format
+          li
+            .label.green Apache Standard
+            .label.green SNORT
+            .label.green …
+        hr
+        ul
+          li Log entries in one file have the same fields
+          li
+            .label.red Time
+            .label.red Source IP
+            .label.red Destination Port
+            .label.red …
+        hr
+        ul
+          li Every log field has types
+          li
+            .label.purple Ordinal
+            .label.purple Categorical
+            .label.purple Time
+            .label.purple Geographical
+            .label.purple …
+
+      section
+        h2 Log Augmentation
+        hr
+        ul
+          li Log datasets are augmented
+        hr
+        ul
+          li
+            em Horizontally
+            span fields of certain types spawn extra fields
+          li
+            .label.red IP
+            span &nbsp;spawns&nbsp;
+            .label.red Geolocation(IP)
+        hr
+        ul
+          li
+            em Vertically
+            span statistical summary for each field
+          li
+            .label.purple Max
+            .label.purple Min
+            .label.purple Distribution
+            .label.purple …
+
+      section
+        h2 Automated Selection of Representations
+        hr
+        ul
+          li Informed decision based on stats and types.
+        hr
+        ul
+          li
+            .label.red Nominal
+            span &nbsp;fields use distributions
+            em Pie charts, bar charts
+          li
+            .label.red Time
+            span &nbsp;requires trend visualizations
+            em Line charts, gantt charts
+          li
+            .label.red Geographic
+            span &nbsp;fields require spatial charts
+            em Maps, real world layout
+
+      section
+        h2 Log Acquisition
+        hr
+        ul
+          li Logs are parsed using the right format
+          li Files can be dragged in straight from the system
+        hr
+        img(src='media/dnd1.gif', width='400px')
+      
+      section
+        h2 Summary View
+        hr
+        img(src='media/overview-apache.png', width='400px')
+      
+      section
+        h2 Top Bar
+        hr
+        img(src='media/overview-top2.png')
+        hr
+        ul
+          li Dataset name, brief info, tools.
+
+      section
+        h2 Key Field
+        hr
+        img(src='media/overview-mid.png')
+        hr
+        ul
+          li Basic visualization, filtering is already available.
+          li
+            em The key field is time so distribution of events is displayed.
+      
+      section
+        h2 Other Fields
+        hr
+        img(src='media/overview-bottom.png')
+        hr
+        ul
+          li Displayed as small multiples according to type and stats.
+          li Distribution histogram for
+            .label.red Nominal
+            span fields.
+          li Line chart for trends in
+            .label.red Cardinal
+            span fields.
+                  
+      section
+        h2 User Interaction
+        hr
+        ul
+          li Fields are selected and dragged to construct visualizations
+        hr
+        img(src='media/viz-map.gif', width='500px')
+              
+      section
+        img(src='media/viz-matrix2.gif', width='600px')
+      
+      section
+        img(src='media/test-tube.svg', height='100px')
+        hr
+        h2 Testing
+        h3 Exploring the HoneyViz dataset.
+        hr
+        ul
+          li Patterns found! Ideas formed!
+          li Promising…
+          li
+            em Some logs were a strain to load…
+
+      section
+        img(src='media/brute.png', width='250px')
+                        
+      section
+        img(src='media/roadmap.svg', height='100px')
+        hr
+        h2 Roadmap
+
+      section
+        h2 User Experience
+        h3 Better exploration.
+        ul
+          li Brushing and Filtering.
+          li Chained visualizations.
+      
+      section
+        h2 Scalability
+        h3 Larger and multiple datasets.
+        ul
+          li Load more data.
+          li Compare and reference datasets.
+          li Server integration
+            em Splunk, Hive?
+          li Sharing and collaboration.
+
+      // section
+      //  h2 Server Integration
+      //  h3 Always on, more power.
+      //  hr
+      //  ul
+      //    li Move processing and collecting to server tools.
+      //      em Splunk, Hive?
+      //    li Enable saving and collaboration.
+
+      section
+        h2 Recording
+        h3 Take notes, save configurations.
+        hr
+        ul
+          li Record datamining scenarios.
+          li Save effective dashboard arrangements.
+          li Inform the datasets.
+          li Help generate reports.
+      
+      section
+        img(src='media/blueprints.svg', height='100px')
+        hr
+        h2 Technical Stuff
+        hr
+        ul
+          li Web based
+          li D3.js • Miso Chart • Miso Dataset
+        hr
+        ul
+          li Server prototypes in Node.js.
+          
+                        
+      section#q
+        h1.thanks Thank you.
+        h3 Questions?
+        #qtimer
+      
+      //- section
+      //-   h2 Syntax Highlighting
+      //-   hr
+      //-   code.language-javascript
+      //-     pre.
+      //-       bespoke.horizontal.from('article', {
+      //-         bullets: 'li, .bullet',
+      //-         hash: true,
+      //-         state: true
+      //-       });
+      //-
+      //- section(data-bespoke-hash='named-route')
+      //-   h2 Named Route
+      //-   p Look up! This route has been named with a <em>'data-bespoke-hash'</em> attribute.
+      //-
+      //- section(data-bespoke-state='emphatic')
+      //-   h2 Emphatic Slide!
+      
+    script(src='bower_components/bespoke.js/dist/bespoke.min.js')
+    script(src='bower_components/bespoke-bullets/dist/bespoke-bullets.min.js')
+    script(src='bower_components/bespoke-hash/dist/bespoke-hash.min.js')
+    script(src='bower_components/bespoke-state/dist/bespoke-state.min.js')
+    script(src='bower_components/prism/prism.js')
+    script(src='scripts/dateformat.js')
+    script(src='scripts/main.js')
